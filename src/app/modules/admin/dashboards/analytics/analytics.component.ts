@@ -148,25 +148,14 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
                     enabled: false
                 }
             },
-
             dataLabels: {
                 enabled: false
             },
-
-            colors: ['#34D399'],
+            colors: ['#34D399', '#667EEA'],
             fill: {
-                colors: ['#34D399'],
-                type: 'gradient',
-                gradient: {
-                    shade: 'dark',
-                    type: "vertical",
-                    shadeIntensity: 0.5,
-                    gradientToColors: ['#34D399'],
-                    opacityFrom: 0.9,
-                    opacityTo: 0.75,
-                    stops: [0, 50, 100],
-                    //colorStops: []
-                },
+                colors: ['#34D399', '#AECDFD'],
+                opacity: 0.5,
+                type: 'solid'
             },
             grid: {
                 show: true,
@@ -252,10 +241,12 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
                     enabled: true
                 }
             },
+
             colors: ['#38BDF8'],
             fill: {
                 colors: ['#38BDF8'],
-                opacity: 0.5
+                opacity: 0.5,
+                type: 'solid'
             },
             series: this.data.conversions.series,
             stroke: {
@@ -293,7 +284,8 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
             colors: ['#34D399'],
             fill: {
                 colors: ['#34D399'],
-                opacity: 0.5
+                opacity: 0.5,
+                type: 'solid'
             },
             series: this.data.impressions.series,
             stroke: {
@@ -375,7 +367,8 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
             },
             fill: {
                 colors: ['#64748B', '#94A3B8'],
-                opacity: 0.5
+                opacity: 0.5,
+                type: 'solid'
             },
             grid: {
                 show: false,

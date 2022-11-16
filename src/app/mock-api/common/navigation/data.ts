@@ -62,18 +62,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
             },
             {
                 id: 'apps.ecommerce',
-                title: 'ECommerce',
-                type: 'collapsable',
-                icon: 'heroicons_outline:shopping-cart',
-                children: [
-                    {
-                        id: 'apps.ecommerce.inventory',
-                        title: 'Inventory',
-                        type: 'basic',
-                        link: '/apps/ecommerce/inventory'
-                    }
-                ]
+                title: 'Meus produtos',
+                type: 'basic',
+                icon: 'heroicons_outline:shopping-bag',
+                link: '/apps/ecommerce/inventory'
             },
+
             {
                 id: 'apps.help-center',
                 title: 'Help Center',

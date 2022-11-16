@@ -2,3 +2,18 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
+
+
+.fuse-vertical-navigation-appearance-default .pepper-menu-hover,
+.fuse-vertical-navigation-hover .pepper-menu-hover{
+    display: block;
+}
+
+.pepper-menu-hover{
+    display: none;
+}
+
+.fuse-vertical-navigation-appearance-default .pepper-menu-hide-hover,
+.fuse-vertical-navigation-hover .pepper-menu-hide-hover{
+    display: none;
+}
