@@ -241,10 +241,9 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
                     enabled: true
                 }
             },
-
-            colors: ['#38BDF8'],
+            colors: ['#38BDF8', '#667EEA'],
             fill: {
-                colors: ['#38BDF8'],
+                colors: ['#38BDF8', '#AECDFD'],
                 opacity: 0.5,
                 type: 'solid'
             },
@@ -281,9 +280,9 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
                     enabled: true
                 }
             },
-            colors: ['#34D399'],
+            colors: ['#34D399', '#667EEA'],
             fill: {
-                colors: ['#34D399'],
+                colors: ['#34D399', '#AECDFD'],
                 opacity: 0.5,
                 type: 'solid'
             },
@@ -320,10 +319,11 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
                     enabled: true
                 }
             },
-            colors: ['#FB7185'],
+            colors: ['#FB7185', '#667EEA'],
             fill: {
-                colors: ['#FB7185'],
-                opacity: 0.5
+                colors: ['#FB7185', '#AECDFD'],
+                opacity: 0.5,
+                type: 'solid'
             },
             series: this.data.visits.series,
             stroke: {
