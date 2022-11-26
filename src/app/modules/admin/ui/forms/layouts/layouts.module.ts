@@ -11,10 +11,13 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from 'app/shared/shared.module';
 import { FormsLayoutsComponent } from 'app/modules/admin/ui/forms/layouts/layouts.component';
+import { CountdownModule } from 'ngx-countdown';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 
 export const routes: Route[] = [
     {
-        path     : '',
+        path: '',
         component: FormsLayoutsComponent
     }
 ];
@@ -23,20 +26,22 @@ export const routes: Route[] = [
     declarations: [
         FormsLayoutsComponent
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
         MatButtonModule,
         MatCheckboxModule,
         MatDividerModule,
         MatFormFieldModule,
         MatIconModule,
+        MatProgressBarModule,
         MatInputModule,
         MatMenuModule,
         MatRadioModule,
+        MatTabsModule,
         MatSelectModule,
-        SharedModule
+        SharedModule,
+        CountdownModule,
     ]
 })
-export class FormsLayoutsModule
-{
+export class FormsLayoutsModule {
 }

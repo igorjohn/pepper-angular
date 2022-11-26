@@ -32,8 +32,8 @@ export interface AppConfig {
  * "Themes" are required for Tailwind to generate themes.
  */
 export const appConfig: AppConfig = {
-    layout: 'dense',
-    scheme: 'dark',
+    layout: 'empty',
+    scheme: 'light',
     screens: {
         sm: '600px',
         md: '960px',
@@ -49,10 +49,6 @@ export const appConfig: AppConfig = {
         {
             id: 'theme-brand',
             name: 'Brand'
-        },
-        {
-            id: 'theme-teal',
-            name: 'Teal'
         },
         {
             id: 'theme-rose',
