@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -14,6 +14,13 @@ import { FormsLayoutsComponent } from 'app/modules/admin/ui/forms/layouts/layout
 import { CountdownModule } from 'ngx-countdown';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { MatListModule } from '@angular/material/list'
+
+
+registerLocaleData(localePt);
 
 export const routes: Route[] = [
     {
@@ -22,16 +29,24 @@ export const routes: Route[] = [
     }
 ];
 
+
+export const maskConfig: Partial<IConfig> = {
+    validation: true,
+};
+
+
 @NgModule({
     declarations: [
         FormsLayoutsComponent
     ],
     imports: [
         RouterModule.forChild(routes),
+        NgxMaskModule.forRoot(maskConfig),
         MatButtonModule,
         MatCheckboxModule,
         MatDividerModule,
         MatFormFieldModule,
+        MatListModule,
         MatIconModule,
         MatProgressBarModule,
         MatInputModule,
@@ -41,7 +56,21 @@ export const routes: Route[] = [
         MatSelectModule,
         SharedModule,
         CountdownModule,
+    ],
+    providers: [
+        {
+            provide: LOCALE_ID,
+            useValue: "pt-BR"
+        },
+
+        /* if you don't provide the currency symbol in the pipe, 
+        this is going to be the default symbol (R$) ... */
+        {
+            provide: DEFAULT_CURRENCY_CODE,
+            useValue: 'BRL'
+        },
     ]
+
 })
 export class FormsLayoutsModule {
 }

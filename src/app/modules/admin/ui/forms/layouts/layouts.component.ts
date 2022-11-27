@@ -29,6 +29,8 @@ export class FormsLayoutsComponent implements OnInit {
     sideImages: any[];
     testimonials: any[];
 
+    orderBumps: any[];
+
 
     cardInstallments: any[];
 
@@ -70,6 +72,32 @@ export class FormsLayoutsComponent implements OnInit {
             plan: ['card'],
 
         });
+
+
+
+        this.orderBumps = [
+
+            {
+                productId: 133,
+                productName: 'Curso de Gastronomia 2.0',
+                productImg: 'https://imagem.natelinha.uol.com.br/grande/AnonymusGourmet.jpg',
+                fakePrice: 899.90,
+                price: 97.00,
+                heading: 'Seja um Chef Foda!',
+                sub: 'Compre este curso e aprenda todas as receitas que você sempre quis. Para amadores e profissionais que desejam aprender dotes culinários e crescer seu negócio.'
+            },
+
+            {
+                productId: 133,
+                productName: 'Curso VOCÊ ELETRICISTA',
+                productImg: 'https://3.bp.blogspot.com/-KzjacI58wy4/WJEgEP3PpJI/AAAAAAAAD-U/U9gupdo_pyo-wU8ujLT2kIngrZ_LTMH7gCLcB/s640/CAPA-390x260.jpg',
+                fakePrice: 297,
+                price: 49.9,
+                heading: 'Conquiste uma nova profissão, com renda de até R$ 8.998,97',
+                sub: 'Aprenda tudo que você precisa para se tornar o eletricista que o mercado precisa.'
+            }
+
+        ]
 
 
 
