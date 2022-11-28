@@ -1,20 +1,19 @@
 <div class="flex flex-col flex-auto min-w-0 relative">
 
     <!-- Header Countdown -->
-    <div class="fixed top-0 left-0 right-0 w-full min-h-18 z-50 text-white flex flex-col items-center justify-end" style="
-                                            background-color: #dc2626;
-                                            opacity: .97;
-                                            box-shadow: 1px 12px 13px -3px #2b475833;">
+    <div *ngFor="let count of countdownSettings; trackBy: trackByFn" class="checkout-countdown" [style.background-color]="count.bgColor">
+
 
         <div class="max-w-5xl flex flex-row items-center justify-center mx-auto">
+
             <!-- Countdown -->
             <div class="text-3xl font-semibold block" style="width: 140px;">
-                <countdown class="px-4" [config]="{ leftTime: 150 }"></countdown>
+                <countdown class="px-4" [style.color]="count.textColor" [config]="{ leftTime: count.timeleft }"></countdown>
             </div>
 
             <!-- SVG icon -->
             <div class="pr-5 pl-6">
-                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet" style="fill: #fedf27;" class="w-10 h-10">
+                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet" [style.fill]="count.svgColor" class="w-10 h-10">
                     <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
                         <path
                             d="M2651 5004 c-69 -19 -108 -43 -161 -100 -136 -148 -114 -380 48 -499 26 -19 64 -40 85 -47 l37 -11 0 -127 0 -127 -72 -18 c-233 -56 -514 -194 -723 -354 -76 -58 -243 -218 -308 -296 l-50 -60 -383 -5 -382 -5 -26 -24 c-50 -48 -39 -133 21 -160 16 -7 129 -11 323 -11 165 0 300 -2 300 -4 0 -2 -24 -50 -54 -107 -29 -57 -68 -143 -86 -191 l-33 -88 -563 0 -563 0 -26 -22 c-34 -30 -44 -88 -20 -124 35 -53 41 -54 601 -54 l516 0 -6 -22 c-7 -27 -33 -217 -42 -300 l-5 -58 -230 0 c-250 0 -274 -4 -297 -55 -15 -33 -15 -57 0 -90 23 -51 47 -55 301 -55 l234 0 7 -80 c6 -77 42 -275 52 -292 3 -4 -141 -8 -321 -8 -353 0 -377 -3 -410 -54 -24 -36 -14 -94 20 -124 26 -22 27 -22 401 -22 l375 0 11 -32 c20 -58 115 -244 168 -329 194 -313 487 -575 825 -739 491 -239 1018 -271 1550 -95 87 29 331 145 408 195 81 52 96 124 35 175 -40 34 -83 32 -143 -6 -94 -60 -265 -140 -382 -179 -540 -179 -1129 -100 -1598 215 -748 503 -1014 1475 -626 2290 248 520 710 879 1291 1002 114 25 145 27 350 27 206 0 236 -2 351 -27 183 -39 296 -78 464 -162 168 -84 286 -164 417 -285 628 -579 769 -1532 334 -2263 -55 -94 -62 -118 -46 -158 21 -49 93 -74 141 -49 25 14 77 97 143 228 342 83 271 1498 -185 2112 -77 104 -247 281 -349 363 -214 173 -482 310 -743 379 l-87 23 0 125 0 125 56 24 c71 31 139 97 172 169 37 81 38 193 0 273 -36 79 -89 133 -166 171 l-67 33 -415 2 c-341 2 -425 0 -469 -13z m839 -190 c43 -9 97 -65 106 -108 8 -46 -10 -96 -47 -132 l-30 -29 -410 -3 c-399 -3 -412 -2 -444 18 -64 39 -84 129 -42 191 45 68 49 69 463 69 204 0 386 -3 404 -6z m-150 -576 l0 -103 -240 0 -240 0 0 103 0 102 240 0 240 0 0 -102z">
@@ -32,19 +31,26 @@
             </div>
 
             <!-- Countdown text -->
-            <div class="text-md sm:text-lg block">
-                Compre logo ou vá embora!
+            <div class="text-md sm:text-lg block" [style.color]="count.textColor">
+                {{ count.initialText }}
             </div>
 
         </div>
 
 
         <!-- Progress bar -->
-        <mat-progress-bar
-            class="mt-3 rounded-full"
-            [color]="'success'"
+
+
+        <div class="w-full h-2 bg-slate-50 mt-4">
+            <div class="h-2 bg-amber-400" [style.width]="progress + '%'"></div>
+        </div>
+
+
+        <!-- <mat-progress-bar
+            class="mt-3"
             [mode]="'determinate'"
-            [value]="70"></mat-progress-bar>
+            [value]="progressbarValue"></mat-progress-bar> -->
+
 
 
     </div>
@@ -55,13 +61,16 @@
 
         <div class="max-w-6xl mx-auto">
 
-            <!-- Banner img -->
-            <img class="w-full rounded-lg border border-slate-200" src="https://cedcommerce.com/blog/wp-content/uploads/2020/12/BigCommerce-Internal-Image-2.jpg">
+            <!-- Header imgs -->
+            <ng-container *ngFor="let img of headerImages; trackBy: trackByFn">
+                <img class="{{ img.size }} rounded-lg border border-slate-200" src="{{ img.url }}">
+            </ng-container>
+
 
             <div class="grid md:grid-cols-3 ">
 
                 <div class="max-w-3xl md:col-span-2">
-                    <form [formGroup]="planBillingForm" class="flex flex-col mt-4 pt-8 bg-card border border-slate-200 rounded-lg overflow-hidden">
+                    <form [formGroup]="planBillingForm" class="flex flex-col mt-3 pt-8 bg-card border border-slate-200 rounded-lg overflow-hidden">
 
                         <div class="grid sm:grid-cols-4 gap-3 px-5 sm:px-6 lg:px-10">
 
@@ -240,11 +249,8 @@
                                         <mat-label>Parcelamento:</mat-label>
                                         <mat-select [placeholder]="'Selecione o parcelamento'" [formControlName]="'installments'">
                                             <ng-container *ngFor="let i of cardInstallments; trackBy: trackByFn">
-
                                                 <mat-option value="{{ i.value }}">{{ i.value }} {{ i.installment | currency }}</mat-option>
-
                                             </ng-container>
-
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -254,23 +260,24 @@
 
                             <!-- PIX Tab -->
                             <div *ngIf="paymentMethodRadio.value == 'pix'" class="sm:col-span-4 grid sm:grid-cols-4 gap-3">
-                                <div class="sm:col-span-4 mt-2">
-                                    <!-- List item -->
-                                    <div class="flex flex-row w-full items-center justify-start mb-2">
-                                        <mat-icon svgIcon="heroicons_outline:thumb-up" class="mr-2 icon-size-5 text-green-500"></mat-icon>
-                                        <span class="text-lg text-green-500 font-semibold">Imediato</span>
+                                <div class="sm:col-span-4">
+                                    <p class="mb-6 font-medium text-lg">Pague no PIX</p>
+
+                                    <div class="pix-li">
+                                        <mat-icon svgIcon="heroicons_outline:thumb-up"></mat-icon>
+                                        <span>Imediato</span>
                                     </div>
                                     <span class="text-slate-400 block mb-6">Ao selecionar a opção Gerar Pix, o código para pagamento estará disponível.</span>
-                                    <!-- List item -->
-                                    <div class="flex flex-row w-full items-center justify-start mb-2">
-                                        <mat-icon svgIcon="heroicons_outline:qrcode" class="mr-2 icon-size-5 text-green-500"></mat-icon>
-                                        <span class="text-lg text-green-500 font-semibold">Pagamento simples</span>
+
+                                    <div class="pix-li">
+                                        <mat-icon svgIcon="heroicons_outline:qrcode"></mat-icon>
+                                        <span>Pagamento simples</span>
                                     </div>
                                     <span class="text-slate-400 block mb-6">Basta abrir o aplicativo do seu banco, procurar pelo PIX e escanear o QRcode.</span>
-                                    <!-- List item -->
-                                    <div class="flex flex-row w-full items-center justify-start mb-2">
-                                        <mat-icon svgIcon="heroicons_outline:shield-check" class="mr-2 icon-size-5 text-green-500"></mat-icon>
-                                        <span class="text-lg text-green-500 font-semibold">100% Seguro</span>
+
+                                    <div class="pix-li">
+                                        <mat-icon svgIcon="heroicons_outline:shield-check"></mat-icon>
+                                        <span>100% Seguro</span>
                                     </div>
                                     <span class="text-slate-400 block mb-6">O pagamento com PIX foi desenvolvido pelo Banco Central para facilitar suas compras.</span>
 
@@ -287,32 +294,45 @@
                                     Leve também estas ofertas exclusivas!
                                 </p>
 
-                                <mat-selection-list>
-                                    <mat-list-option *ngFor="let ob of orderBumps" checkboxPosition="before" class="mt-4 orderbump">
+                                <!-- Order Bumps -->
 
-                                        <div class="pt-4 pb-6">
+                                <div class="mt-4">
 
-                                            <div class="w-full flex items-center mb-4">
-                                                <mat-icon class="icon-size-5 text-red-600" svgIcon="heroicons_solid:arrow-right"></mat-icon>
-                                                <span class="font-medium ml-3">{{ ob.productName }}</span>
+
+                                    <!-- 
+
+                                        ###### Fazer o toggle select no checkbox aqui ######
+
+                                     -->
+                                    <div class="orderbump mb-4" matRipple [matRippleColor]="'#99999933'" *ngFor="let ob of orderBumps">
+
+                                        <!-- Header Order bump -->
+                                        <div class="w-full flex items-center justify-center mb-1 p-2" style="background-color: #ecebf5;">
+                                            <!-- Arrow right svg -->
+                                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 690 512" preserveAspectRatio="xMidYMid meet" style="margin-left: -0.25rem; fill: #dc2626; padding-bottom: 0.2rem;" class="orderbump-arrow w-10">
+                                                <g xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="m596.39 279.65c-0.0625-3.1133-1.4961-6.1758-3.8516-8.2227l-156.8-134.33c-3.2383-2.8125-8.1562-3.5117-12.051-1.7148-3.8945 1.7969-6.5469 5.9961-6.5 10.285v67.164h-302.39c-5.8633 0-11.199 5.332-11.199 11.195v111.94c0 5.8594 5.3359 11.191 11.199 11.195h302.39v67.164c-0.042968 4.2852 2.6055 8.4844 6.5 10.285 3.8945 1.7969 8.8125 1.0977 12.051-1.7148l156.8-134.32c2.5312-2.1953 3.9883-5.5742 3.8516-8.918z" />
+                                                </g>
+                                            </svg>
+                                            <span class="md:ml-1" style="font-size: 1rem !important; font-weight: 500 !important; font-style: italic;">Sim! Quero levar também</span>
+                                        </div>
+
+                                        <div class="flex" style="padding: 1rem 16px 1.5rem 16px;">
+                                            <mat-checkbox [value]="ob.productId" class="mr-2"></mat-checkbox>
+                                            <img class="w-14 h-14 mr-3 sm:mr-4 rounded object-cover border border-slate-200" src="{{ ob.productImg }}">
+                                            <div class="flex flex-col min-w-0">
+                                                <div class="font-semibold mb-1 text-lg leading-7">{{ ob.heading }}</div>
+                                                <div class="text-md leading-5">{{ ob.sub }}</div>
+                                                <div class="text-md leading-5 text-secondary mt-2">De <span class="line-through">{{ ob.fakePrice | currency }}</span> por {{ ob.price | currency }}</div>
                                             </div>
-
-                                            <div class="flex">
-                                                <img
-                                                    class="w-14 h-14 mr-3 sm:mr-4 rounded object-cover border border-slate-200"
-                                                    src="{{ ob.productImg }}">
-                                                <div class="flex flex-col min-w-0">
-                                                    <div class="font-semibold mb-2 leading-7">{{ ob.heading }}</div>
-                                                    <div class="text-md leading-5">{{ ob.sub }}</div>
-                                                    <div class="text-md leading-5 text-secondary mt-2">De <span class="line-through">{{ ob.fakePrice | currency }}</span> por {{ ob.price | currency }}</div>
-                                                </div>
-                                            </div>
-
                                         </div>
 
 
-                                    </mat-list-option>
-                                </mat-selection-list>
+                                    </div>
+
+                                </div>
+
+
 
                                 <!-- <p>
                                     Options selected: {{ ob.selectedOptions.selected.length }}
@@ -328,12 +348,9 @@
 
 
                         <div class="flex flex-col items-center justify-center mt-3 px-6 py-8 md:rounded-bl-lg lg:px-10">
-                            <a href="#_" class="buy-btn inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg font-semibold text-white bg-green-500 rounded-md hover:bg-green-400 sm:mb-0" data-primary="green-400" data-rounded="rounded-2xl" data-primary-reset="{}">
+                            <button class="buy-btn" data-primary="green-400" data-rounded="rounded-2xl" data-primary-reset="{}" [class.spinner]="loading" [disabled]="loading" (click)="OnPurchase()">
                                 Comprar agora
-                                <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
-                            </a>
+                            </button>
 
                             <div class="text-sm text-slate-400 block mt-5 flex items-center justify-center">
                                 <mat-icon class="icon-size-3 text-slate-400 mr-2" svgIcon="heroicons_outline:lock-closed" style="margin-bottom: 0.1rem;"></mat-icon>
@@ -345,7 +362,7 @@
                 </div>
 
 
-                <div class="max-w-xl md:pl-4 md:pr-0 pt-4 md:col-span-1">
+                <div class="max-w-xl md:pl-4 md:pr-0 pt-3 md:col-span-1">
 
                     <div class="grid grid-cols-1 gap-4">
 
@@ -427,134 +444,22 @@
         </div>
 
     </div>
+
+
+
+
+    <fuse-alert
+        [appearance]="'soft'"
+        [dismissible]="true"
+        [dismissed]="true"
+        [name]="'notification1'"
+        [type]="'primary'">
+        <mat-icon class="circle pulse" fuseAlertIcon [svgIcon]="'heroicons_solid:shopping-cart'"></mat-icon>
+        <span>24 pessoas estão olhando este produto agora.</span>
+    </fuse-alert>
+
+
+
+
+
 </div>
-
-
-<style>
-    .buy-btn {
-        box-shadow: inset 0 -4px 0 0px rgb(0 0 0 / 13%);
-        padding-bottom: 16px !important;
-    }
-
-    .count-down,
-    .count-down span {
-        font-family: 'Azeret Mono', monospace !important;
-    }
-
-    .mat-form-field.mat-form-field-appearance-fill .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix .mat-input-element {
-        padding: 12px 0;
-    }
-
-    .mat-form-field.mat-form-field-appearance-fill .mat-form-field-wrapper .mat-form-field-flex {
-        min-height: 42px;
-        padding: 0 12px;
-    }
-
-    .mat-form-field,
-    .mat-focused {
-        transition: all .3s ease;
-    }
-
-    .checkout-step {
-        margin-right: 8px;
-        flex: none;
-        background-color: #4f46e5;
-        color: #fff;
-        border-radius: 50%;
-        height: 24px;
-        width: 24px;
-        flex-shrink: 0;
-        position: relative;
-        -webkit-font-smoothing: auto !important;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 600;
-    }
-
-    .checkout-step-wrapper {
-        width: 100%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .testimonial-icon {
-        width: 100%;
-        text-align: center;
-    }
-
-    .testimonial-icon .mat-icon {
-        margin: 0 -0.075rem;
-        color: #e7a71c;
-    }
-
-    .mat-select-panel .mat-option {
-        font-size: .85rem !important;
-        line-height: 2.75em !important;
-        height: 2.75em !important;
-    }
-
-    .mat-select-panel {
-        max-height: 80vh !important;
-    }
-
-    .mat-list-base .mat-list-item,
-    .mat-list-base .mat-list-option {
-        height: auto !important;
-        border-radius: 4px;
-    }
-
-    .orderbump .mat-pseudo-checkbox,
-    .orderbump .mat-pseudo-checkbox {
-        margin-top: 4rem;
-    }
-
-    .mat-list-base .mat-list-item .mat-list-item-content,
-    .mat-list-base .mat-list-option .mat-list-item-content {
-        border: 2px dashed #dc2626;
-        border-radius: 4px;
-        background-color: #f6f7f9;
-        align-items: flex-start !important;
-    }
-
-    body.light .mat-pseudo-checkbox-checked,
-    body.light .mat-pseudo-checkbox-indeterminate,
-    body.light .mat-accent .mat-pseudo-checkbox-checked,
-    body.light .mat-accent .mat-pseudo-checkbox-indeterminate,
-    body .light .mat-pseudo-checkbox-checked,
-    body .light .mat-pseudo-checkbox-indeterminate,
-    body .light .mat-accent .mat-pseudo-checkbox-checked,
-    body .light .mat-accent .mat-pseudo-checkbox-indeterminate {
-        background: #4f46e5 !important;
-    }
-
-    @media (max-width: 768px) {
-
-        .mat-list-base .mat-list-item.mat-list-item-with-avatar .mat-list-item-content .mat-list-text,
-        .mat-list-base .mat-list-item.mat-list-option .mat-list-item-content .mat-list-text,
-        .mat-list-base .mat-list-option.mat-list-item-with-avatar .mat-list-item-content .mat-list-text,
-        .mat-list-base .mat-list-option.mat-list-option .mat-list-item-content .mat-list-text {
-            padding-left: 12px !important;
-        }
-
-    }
-
-    /* ESCONDER NAVEGAÇÃO ---- MUDAR DEPOIS TIRAR ISSO */
-    .fuse-vertical-navigation-opened.fuse-vertical-navigation-position-left {
-        display: none !important;
-    }
-
-    .settings-cog.fixed {
-        display: none !important;
-    }
-
-    .relative.flex.flex-0.items-center.w-full.h-16.px-4.z-49 {
-        display: none !important;
-    }
-
-    .relative.flex.flex-0.items-center.justify-start.w-full.h-14.px-4 {
-        display: none !important;
-    }
-</style>

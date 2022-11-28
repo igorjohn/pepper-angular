@@ -15,9 +15,11 @@ import { CountdownModule } from 'ngx-countdown';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { MatListModule } from '@angular/material/list'
+import { FuseAlertModule } from '@fuse/components/alert';
+import { MatRippleModule } from '@angular/material/core';
 
 
 registerLocaleData(localePt);
@@ -50,12 +52,15 @@ export const maskConfig: Partial<IConfig> = {
         MatIconModule,
         MatProgressBarModule,
         MatInputModule,
+        FuseAlertModule,
         MatMenuModule,
         MatRadioModule,
+        MatRippleModule,
         MatTabsModule,
         MatSelectModule,
         SharedModule,
         CountdownModule,
+        CommonModule
     ],
     providers: [
         {
