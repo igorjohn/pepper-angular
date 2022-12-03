@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { FuseAlertService } from '@fuse/components/alert';
 
@@ -92,7 +92,7 @@ export class FormsLayoutsComponent implements OnInit {
             this.display = `${prefix}${Math.floor(seconds / 60)}:${textSec}`;
             this.progressbarDisplayValue = (seconds * 100) / (minute * 60);
 
-            console.log(this.progress)
+            //console.log(this.progress)
 
             if (seconds == 0) {
                 clearInterval(timer);

@@ -21,6 +21,12 @@ import { MatListModule } from '@angular/material/list'
 import { FuseAlertModule } from '@fuse/components/alert';
 import { MatRippleModule } from '@angular/material/core';
 
+// Credit card validator
+import { AswCardModule } from '@asoftwareworld/card-validator/card';
+import { AswCardCvvModule } from '@asoftwareworld/card-validator/card-cvv';
+import { AswCardDateModule } from '@asoftwareworld/card-validator/card-date';
+import { CardCvvService, CardCvvValidator } from '@asoftwareworld/card-validator/common';
+
 
 registerLocaleData(localePt);
 
@@ -60,7 +66,13 @@ export const maskConfig: Partial<IConfig> = {
         MatSelectModule,
         SharedModule,
         CountdownModule,
-        CommonModule
+        CommonModule,
+
+
+        // Credit card validators
+        AswCardModule,
+        AswCardCvvModule,
+        AswCardDateModule
     ],
     providers: [
         {
@@ -74,6 +86,8 @@ export const maskConfig: Partial<IConfig> = {
             provide: DEFAULT_CURRENCY_CODE,
             useValue: 'BRL'
         },
+        CardCvvService,
+        CardCvvValidator
     ]
 
 })

@@ -179,9 +179,9 @@
 
 
                             <!-- Credit Card Tab -->
-                            <div *ngIf="paymentMethodRadio.value == 'card'" class="sm:col-span-4 grid sm:grid-cols-4 gap-3 mb-6">
+                            <div *ngIf="paymentMethodRadio.value == 'card'" class="w-full sm:col-span-4 inline-grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
                                 <!-- Card holder -->
-                                <div class="sm:col-span-4">
+                                <div class="col-span-2 sm:col-span-4">
                                     <mat-form-field class="fuse-mat-no-subscript w-full" hideRequiredMarker>
                                         <mat-label>Nome impresso no cartão:</mat-label>
                                         <input
@@ -191,8 +191,25 @@
                                     </mat-form-field>
                                 </div>
                                 <!-- Card number -->
-                                <div class="sm:col-span-4">
-                                    <mat-form-field class="fuse-mat-no-subscript w-full" hideRequiredMarker>
+                                <div class="col-span-2 sm:col-span-4">
+
+                                    <mat-form-field class="asw-full-width w-full">
+                                        <mat-label>Número do cartão:</mat-label>
+                                        <asw-card formControlName="cardNumber" name="card" [required]="required" inputmode="numeric"></asw-card>
+                                        <mat-error *ngIf="planBillingForm.get('cardNumber')?.invalid && (planBillingForm.get('cardNumber')?.dirty || planBillingForm.get('cardNumber')?.touched)">
+                                            <mat-error *ngIf="planBillingForm.get('cardNumber')?.errors?.required">
+                                                Digite o número do cartão.
+                                            </mat-error>
+                                            <mat-error *ngIf="planBillingForm.get('cardNumber')?.errors?.minlength">
+                                                Este número não está completo.
+                                            </mat-error>
+                                            <mat-error *ngIf="planBillingForm.get('cardNumber')?.errors?.invalidCardNumber && !planBillingForm.get('cardNumber')?.errors?.required && !planBillingForm.get('cardNumber')?.errors?.minlength">
+                                                O cartão informado é inválido.
+                                            </mat-error>
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <!-- <mat-form-field class="fuse-mat-no-subscript w-full" hideRequiredMarker>
                                         <mat-label>Número do cartão:</mat-label>
                                         <mat-icon
                                             class="icon-size-4"
@@ -204,11 +221,33 @@
                                             inputmode="numeric"
                                             matInput
                                             required>
-                                    </mat-form-field>
+                                    </mat-form-field> -->
                                 </div>
+
                                 <!-- Card expiration -->
-                                <div class="sm:col-span-2">
-                                    <mat-form-field
+                                <div class="col-span-1 md:col-span-2">
+
+
+                                    <mat-form-field class="asw-full-width w-full" hideRequiredMarker>
+                                        <mat-label>Validade (MM/AA)</mat-label>
+                                        <mat-icon
+                                            class="icon-size-4"
+                                            [svgIcon]="'heroicons_solid:calendar'"
+                                            matPrefix></mat-icon>
+                                        <asw-card-date formControlName="cardExpiration" required inputmode="numeric" [mask]="'[00]\[00]'"></asw-card-date>
+                                        <mat-error *ngIf="planBillingForm.get('cardExpiration')?.invalid && (planBillingForm.get('cardExpiration')?.dirty || planBillingForm.get('cardExpiration')?.touched)">
+                                            <mat-error *ngIf="planBillingForm.get('cardExpiration')?.errors?.required">
+                                                Campo obrigatório.
+                                            </mat-error>
+                                            <mat-error *ngIf="planBillingForm.get('cardExpiration')?.errors?.invalidCardDate && !planBillingForm.get('cardExpiration')?.errors?.required">
+                                                Data inválida.
+                                            </mat-error>
+                                        </mat-error>
+                                    </mat-form-field>
+
+
+
+                                    <!--   <mat-form-field
                                         class="fuse-mat-no-subscript w-full"
                                         hideRequiredMarker
                                         [floatLabel]="'always'">
@@ -222,10 +261,10 @@
                                             [placeholder]="'MM / YY'"
                                             matInput
                                             required>
-                                    </mat-form-field>
+                                    </mat-form-field> -->
                                 </div>
                                 <!-- Card CVC -->
-                                <div class="sm:col-span-2">
+                                <div class="col-span-1 md:col-span-2">
                                     <mat-form-field class="fuse-mat-no-subscript w-full" hideRequiredMarker>
                                         <mat-label>CVC</mat-label>
                                         <mat-icon
@@ -241,7 +280,7 @@
                                     </mat-form-field>
                                 </div>
                                 <!-- Parcelamento -->
-                                <div class="sm:col-span-4">
+                                <div class="col-span-2 sm:col-span-4">
                                     <mat-form-field
                                         class="fuse-mat-no-subscript w-full"
                                         hideRequiredMarker
@@ -439,6 +478,12 @@
             <div class="max-w-3xl text-xs text-slate-400 block mt-12 px-1 md:px-2">
                 <span class="block mb-2">Esta compra é processada por Pepper Tecnologia e Pagamentos Ltda. *Taxa de 2,99% a.m.</span>
                 <span class="block mb-2">Dúvidas? Entre em contato com o produtor: <a href="#" class="text-slate-600 underline">contato@produtor.uy</a></span>
+                <span class="inline-flex items-center mb-2">
+                    <a href="#" class="text-slate-400 mr-4">Termos de uso</a>
+                    <a href="#" class="inline-flex items-end text-slate-400">
+                        <mat-icon class="icon-size-3 text-slate-400" style="margin: 0 0.15rem 0.07rem 0" svgIcon="heroicons_outline:exclamation-circle"></mat-icon>Reportar este produto
+                    </a>
+                </span>
             </div>
 
         </div>
